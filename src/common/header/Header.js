@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 class Header extends React.Component {
     render() {
         return (
-            <div>
+            <div className="header-container">
                 <Button variant="contained" color="default">
                     Login
                 </Button>
