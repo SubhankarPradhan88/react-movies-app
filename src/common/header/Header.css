@@ -1,10 +1,26 @@
 .header-container {
     width: 100%;
     height: auto;
-    padding: 10px;
+    padding: 10px 0 10px 0;
     margin: 0 auto;
     background: #000000;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+}
+.header-container > img {
+    margin-left: 10px;
+}
+.header-container > button {
+    margin-right: 10px;
+}
+.app-logo {
+    animation: app-logo-spin infinite 8s linear;
+    height: 35px;
+    background: #ff7f7f;
+}
+@keyframes app-logo-spin {
+    from {
+        transform: scaleX(-1);
+    }
 }
