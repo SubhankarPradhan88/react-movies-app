@@ -7,6 +7,17 @@ import Modal from 'react-modal';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+}
 class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -34,7 +45,13 @@ class Header extends React.Component {
                         Login
                     </Button>
                 </header>
-                <Modal ariaHideApp={false} onRequestClose={this.closeModalHandler} isOpen={this.state.modalIsOpen} contentLabel="Login">
+                <Modal 
+                    ariaHideApp={false} 
+                    onRequestClose={this.closeModalHandler} 
+                    isOpen={this.state.modalIsOpen} 
+                    contentLabel="Login"
+                    style={customStyles}
+                >
                     <Tabs value={this.state.value} onChange={this.tabChangeHandler}>
                         <Tab label="Login"/>
                         <Tab label="Register"/>
