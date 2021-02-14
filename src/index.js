@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Home from './screens/home/Home';
 import './index.css';
+import 'fontsource-roboto';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
