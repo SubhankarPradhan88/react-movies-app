@@ -41,25 +41,49 @@ class Header extends React.Component {
             modalIsOpen: false,
             value: 0,
             username: '',
-            usernameRequired: "dispNone"
+            password: '',
+            usernameRequired: "dispNone",
+            userPasswordRequired: "dispNone"
         };
     }
     openModalHandler = () => {
-        this.setState({modalIsOpen: true});
+        this.setState({
+            value: 0,
+            modalIsOpen: true
+        });
     }
     closeModalHandler = () => {
-        this.setState({modalIsOpen: false});
+        this.setState({
+            username: '',
+            password: '',
+            modalIsOpen: false,
+            usernameRequired: "dispNone",
+            userPasswordRequired: "dispNone"
+        });
     }
     tabChangeHandler = (event, value) => {
-        console.log(value);
         this.setState({value});
     }
     loginClickHandler = () => {
-        !this.state.username ? this.setState({usernameRequired: 'dispBlock'}) : this.setState({usernameRequired: 'dispNone'});
+        console.log('this.state.username', this.state.username);
+        if(!this.state.username) {
+            this.setState({usernameRequired: 'dispBlock'});
+        }else {
+            this.setState({usernameRequired: 'dispNone'});
+        }
+        if(!this.state.password) {
+            this.setState({userPasswordRequired: 'dispBlock'});
+        }else {
+            this.setState({userPasswordRequired: 'dispNone'});
+        }
     }
     inputUsernameChangeHandler = (e) => {
         let userNameVal = e.target.value.trim();
         this.setState({username: userNameVal});
+    }
+    inputPasswordChangeHandler = (e) => {
+        let userPasswordVal = e.target.value.trim();
+        this.setState({password: userPasswordVal});
     }
 
     render() {
@@ -92,7 +116,8 @@ class Header extends React.Component {
                             <br/><br/>
                             <FormControl required>
                                 <InputLabel htmlFor="password">Password </InputLabel>
-                                <Input id="password" type="password" />
+                                <Input id="password" type="password" onChange={this.inputPasswordChangeHandler} />
+                                <FormHelperText className={this.state.userPasswordRequired}><span className="red">required</span></FormHelperText>
                             </FormControl>
                             <br/><br/>
                             <Button variant="contained" color="primary" onClick={this.loginClickHandler}>
