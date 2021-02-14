@@ -42,8 +42,18 @@ class Header extends React.Component {
             value: 0,
             username: '',
             password: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            registerPassword: '',
+            contactNo: '',
             usernameRequired: "dispNone",
-            userPasswordRequired: "dispNone"
+            userPasswordRequired: "dispNone",
+            firstnameRequired: "dispNone",
+            lastnameRequired: "dispNone",
+            emailRequired: "dispNone",
+            registerFormPasswordRequired: "dispNone",
+            contactNoRequired: "dispNone"
         };
     }
     openModalHandler = () => {
@@ -56,16 +66,25 @@ class Header extends React.Component {
         this.setState({
             username: '',
             password: '',
+            firstname: '',
+            lastname: '',
+            email: '',
+            registerPassword: '',
+            contactNo: '',
             modalIsOpen: false,
             usernameRequired: "dispNone",
-            userPasswordRequired: "dispNone"
+            userPasswordRequired: "dispNone",
+            firstnameRequired: "dispNone",
+            lastnameRequired: "dispNone",
+            emailRequired: "dispNone",
+            registerFormPasswordRequired: "dispNone",
+            contactNoRequired: "dispNone"
         });
     }
     tabChangeHandler = (event, value) => {
         this.setState({value});
     }
     loginClickHandler = () => {
-        console.log('this.state.username', this.state.username);
         if(!this.state.username) {
             this.setState({usernameRequired: 'dispBlock'});
         }else {
@@ -77,16 +96,60 @@ class Header extends React.Component {
             this.setState({userPasswordRequired: 'dispNone'});
         }
     }
-    inputUsernameChangeHandler = (e) => {
-        let userNameVal = e.target.value.trim();
-        this.setState({username: userNameVal});
+    registerClickHandler = () => {
+        if(!this.state.firstname) {
+            this.setState({firstnameRequired: 'dispBlock'});
+        }else {
+            this.setState({firstnameRequired: 'dispNone'});
+        }
+        if(!this.state.lastname) {
+            this.setState({lastnameRequired: 'dispBlock'});
+        }else {
+            this.setState({lastnameRequired: 'dispNone'});
+        }
+        if(!this.state.email) {
+            this.setState({emailRequired: 'dispBlock'});
+        }else {
+            this.setState({emailRequired: 'dispNone'});
+        }
+        if(!this.state.registerPassword) {
+            this.setState({registerFormPasswordRequired: 'dispBlock'});
+        }else {
+            this.setState({registerFormPasswordRequired: 'dispNone'});
+        }
+        if(!this.state.contactNo) {
+            this.setState({contactNoRequired: 'dispBlock'});
+        }else {
+            this.setState({contactNoRequired: 'dispNone'});
+        }
     }
-    inputPasswordChangeHandler = (e) => {
-        let userPasswordVal = e.target.value.trim();
-        this.setState({password: userPasswordVal});
+    handleChange = (e, check) => {
+        switch(check) {
+            case 'username':
+                this.setState({username: e.target.value.trim()});
+                break;
+            case 'password':
+                this.setState({password: e.target.value.trim()});
+                break;
+            case 'firstname':
+                this.setState({firstname: e.target.value.trim()});
+                break;
+            case 'lastname':
+                this.setState({lastname: e.target.value.trim()});
+                break;
+            case 'email':
+                this.setState({email: e.target.value.trim()});
+                break;
+            case 'registerPassword':
+                this.setState({registerPassword: e.target.value.trim()});
+                break;
+            case 'contactNo':
+                this.setState({contactNo: e.target.value.trim()});
+        }
     }
 
     render() {
+        let {username, password, firstname, lastname, email, registerPassword, contactNo} = this.state;
         return (
             <React.Fragment>
                 <header className="header-container">
@@ -106,22 +169,57 @@ class Header extends React.Component {
                         <Tab label="Login"/>
                         <Tab label="Register"/>
                     </Tabs>
-                    {this.state.value === 0 && 
+                    {this.state.value === 0 ?
                         <TabContainer>
                             <FormControl required>
                                 <InputLabel htmlFor="username">Username </InputLabel>
-                                <Input id="username" type="text" onChange={this.inputUsernameChangeHandler} />
+                                <Input id="username" type="text" onChange={(e) => this.handleChange(e, 'username')} value={username} />
                                 <FormHelperText className={this.state.usernameRequired}><span className="red">required</span></FormHelperText>
                             </FormControl>
                             <br/><br/>
                             <FormControl required>
                                 <InputLabel htmlFor="password">Password </InputLabel>
-                                <Input id="password" type="password" onChange={this.inputPasswordChangeHandler} />
+                                <Input id="password" type="password" onChange={(e) => this.handleChange(e, 'password')} value={password} />
                                 <FormHelperText className={this.state.userPasswordRequired}><span className="red">required</span></FormHelperText>
                             </FormControl>
                             <br/><br/>
                             <Button variant="contained" color="primary" onClick={this.loginClickHandler}>
                                 LOGIN
+                            </Button>
+                        </TabContainer> : 
+                        <TabContainer>
+                            <FormControl required>
+                                <InputLabel htmlFor="firstname">First Name </InputLabel>
+                                <Input id="firstname" type="text" onChange={(e) => this.handleChange(e, 'firstname')} value={firstname} />
+                                <FormHelperText className={this.state.firstnameRequired}><span className="red">required</span></FormHelperText>
+                            </FormControl>
+                            <br/><br/>
+                            <FormControl required>
+                                <InputLabel htmlFor="lastname">Last Name </InputLabel>
+                                <Input id="lastname" type="text" onChange={(e) => this.handleChange(e, 'lastname')} value={lastname} />
+                                <FormHelperText className={this.state.lastnameRequired}><span className="red">required</span></FormHelperText>
+                            </FormControl>
+                            <br/><br/>
+                            <FormControl required>
+                                <InputLabel htmlFor="email">Email </InputLabel>
+                                <Input id="email" type="email" onChange={(e) => this.handleChange(e, 'email')} value={email} />
+                                <FormHelperText className={this.state.emailRequired}><span className="red">required</span></FormHelperText>
+                            </FormControl>
+                            <br/><br/>
+                            <FormControl required>
+                                <InputLabel htmlFor="registerPassword">Password </InputLabel>
+                                <Input id="registerPassword" type="password" onChange={(e) => this.handleChange(e, 'registerPassword')} value={registerPassword} />
+                                <FormHelperText className={this.state.registerFormPasswordRequired}><span className="red">required</span></FormHelperText>
+                            </FormControl>
+                            <br/><br/>
+                            <FormControl required>
+                                <InputLabel htmlFor="contactNo">Contact No. </InputLabel>
+                                <Input id="contactNo" type="number" onChange={(e) => this.handleChange(e, 'contactNo')} value={contactNo} />
+                                <FormHelperText className={this.state.contactNoRequired}><span className="red">required</span></FormHelperText>
+                            </FormControl>
+                            <br/><br/>
+                            <Button variant="contained" color="primary" onClick={this.registerClickHandler}>
+                                REGISTER
                             </Button>
                         </TabContainer>
                     }
