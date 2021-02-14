@@ -14,6 +14,9 @@
 .header-container > button {
     margin-right: 10px;
 }
+.tabs {
+    margin-bottom: 20px;
+}
 .app-logo {
     animation: app-logo-spin infinite 8s linear;
     height: 35px;
