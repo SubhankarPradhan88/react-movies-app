@@ -58,7 +58,7 @@ class Home extends React.Component {
                             <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
                             <GridListTileBar
                                 title={movie.title}
-                                subtitle={<span>{movie.release_date}</span>}
+                                subtitle={<span>Release Date: {new Date(movie.release_date).toDateString()}</span>}
                             />
                         </GridListTile>
                     ))}
