@@ -23,6 +23,15 @@ const styles = theme => ({
         flexWrap: 'nowrap',
         transform: 'translateZ(0)',
         width: '100%'
+    },
+    gridListReleasedMovies: {
+        padding: '15px',
+        flexWrap: 'wrap',
+        transform: 'translateZ(0)',
+        width: '70%'
+    },
+    releasedMoviesAlign: {
+        marginRight: '5px'
     }
  });
 
@@ -40,6 +49,17 @@ class Home extends React.Component {
                         <GridListTile key={movie.id}>
                             <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
                             <GridListTileBar title={movie.title} />
+                        </GridListTile>
+                    ))}
+                </GridList>
+                <GridList cols={4} className={classes.gridListReleasedMovies}>
+                    {moviesData.map(movie => (
+                        <GridListTile key={movie.id} className={classes.releasedMoviesAlign}>
+                            <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
+                            <GridListTileBar
+                                title={movie.title}
+                                subtitle={<span>{movie.release_date}</span>}
+                            />
                         </GridListTile>
                     ))}
                 </GridList>
