@@ -7,6 +7,13 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { withStyles } from '@material-ui/core/styles';
+import card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Card from '@material-ui/core/Card';
+import FormControl from '@material-ui/core/FormControl';
+import Typography from '@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
 
 const styles = theme => ({
     root: {
@@ -25,17 +32,35 @@ const styles = theme => ({
         width: '100%'
     },
     gridListReleasedMovies: {
-        padding: '15px',
         flexWrap: 'wrap',
         transform: 'translateZ(0)',
-        width: '70%'
+        width: '70%',
+        cursor: 'pointer'
     },
     releasedMoviesAlign: {
-        marginRight: '5px'
-    }
+        margin: 10
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 240,
+        maxWidth: 240
+     },
+     title: {
+        color: theme.palette.primary.light,
+     }
  });
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            movieName: ''
+        }
+    }
+
+    movieNameChangeHandler = (e) => {
+        this.setState({movieName: e.target.value});
+    }
     render() {
         const { classes } = this.props;
         return (
@@ -52,17 +77,36 @@ class Home extends React.Component {
                         </GridListTile>
                     ))}
                 </GridList>
-                <GridList cols={4} className={classes.gridListReleasedMovies}>
-                    {moviesData.map(movie => (
-                        <GridListTile key={movie.id} className={classes.releasedMoviesAlign}>
-                            <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
-                            <GridListTileBar
-                                title={movie.title}
-                                subtitle={<span>Release Date: {new Date(movie.release_date).toDateString()}</span>}
-                            />
-                        </GridListTile>
-                    ))}
-                </GridList>
+                <div className="flex-container">
+                    <div>
+                        <GridList cellHeight={350} cols={4} className={classes.gridListReleasedMovies}>
+                            {moviesData.map(movie => (
+                                <GridListTile key={movie.id} className={classes.releasedMoviesAlign}>
+                                    <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
+                                    <GridListTileBar
+                                        title={movie.title}
+                                        subtitle={<span>Release Date: {new Date(movie.release_date).toDateString()}</span>}
+                                    />
+                                </GridListTile>
+                            ))}
+                        </GridList>
+                    </div>
+                    <div>
+                        <Card>
+                            <CardContent>
+                                <FormControl className={classes.formControl}>
+                                    <Typography className={classes.title} color="textSecondary">
+                                        FIND MOVIES BY:
+                                    </Typography>
+                                </FormControl>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel htmlFor="movieName">Movie Name </InputLabel>
+                                    <Input id="movieName" onChange={this.movieNameChangeHandler} />
+                                </FormControl>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
             </div>
         )
     }
