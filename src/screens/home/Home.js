@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import './Home.css';
 import Header from '../../common/header/Header';
 import moviesData from '../../common/moviesData';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -32,6 +35,14 @@ class Home extends React.Component {
                 <div className={classes.upcomingMoviesHeading}>
                     <span> Upcoming movies </span>
                 </div>
+                <GridList cols={5} className={classes.gridListUpcomingMovies}>
+                    {moviesData.map(movie => (
+                        <GridListTile key={movie.id}>
+                            <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
+                            <GridListTileBar title={movie.title} />
+                        </GridListTile>
+                    ))}
+                </GridList>
             </div>
         )
     }
