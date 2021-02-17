@@ -19,6 +19,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
     root: {
@@ -37,10 +38,16 @@ const styles = theme => ({
         width: '100%'
     },
     gridListReleasedMovies: {
+        paddingLeft: 20,
+        width: '100%',
         flexWrap: 'wrap',
         transform: 'translateZ(0)',
-        width: '70%',
         cursor: 'pointer'
+    },
+    filterMoviesStyle: {
+        width: '50%',
+        margin: '20px 30px 20px 0',
+        float: 'right'
     },
     releasedMoviesAlign: {
         margin: 10
@@ -106,7 +113,7 @@ class Home extends React.Component {
                         </GridList>
                     </div>
                     <div>
-                        <Card>
+                        <Card className={classes.filterMoviesStyle}>
                             <CardContent>
                                 <FormControl className={classes.formControl}>
                                     <Typography className={classes.title} color="textSecondary">
@@ -152,6 +159,24 @@ class Home extends React.Component {
                                             </MenuItem>
                                         ))}
                                     </Select>
+                                </FormControl>
+                                <FormControl className={classes.formControl}>
+                                    <TextField
+                                        id="releaseDateStart"
+                                        label="Release Date Start"
+                                        type="date"
+                                        defaultValue=""
+                                        InputLabelProps={{ shrink: true }}
+                                    />
+                                </FormControl>
+                                <FormControl className={classes.formControl}>
+                                    <TextField
+                                        id="releaseDateEnd"
+                                        label="Release Date End"
+                                        type="date"
+                                        defaultValue=""
+                                        InputLabelProps={{ shrink: true }}
+                                    />
                                 </FormControl>
                             </CardContent>
                         </Card>
