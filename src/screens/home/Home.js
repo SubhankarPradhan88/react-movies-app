@@ -146,9 +146,9 @@ class Home extends React.Component {
                                     >
                                         <MenuItem value="0">None</MenuItem>
                                         {artists.map(artist => (
-                                            <MenuItem key={artist.id} value={artist.first_name}>
-                                                <Checkbox checked={this.state.artists.indexOf(artist.first_name) > -1} />
-                                                <ListItemText primary={artist.first_name} />
+                                            <MenuItem key={artist.id} value={artist.first_name + " " + artist.last_name}>
+                                                <Checkbox checked={this.state.artists.indexOf(artist.first_name + " " + artist.last_name) > -1} />
+                                                <ListItemText primary={artist.first_name + " " + artist.last_name} />
                                             </MenuItem>
                                         ))}
                                     </Select>
