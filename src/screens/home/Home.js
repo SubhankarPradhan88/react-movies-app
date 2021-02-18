@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
+import ReactDOM from 'react-dom';
 import './Home.css';
+import Details from '../../screens/details/Details';
 import Header from '../../common/header/Header';
 import moviesData from '../../common/moviesData';
 import genres from '../../common/genres';
@@ -54,7 +55,7 @@ const styles = theme => ({
         margin: 10
     },
     formControl: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(),
         minWidth: 240,
         maxWidth: 240
      },
@@ -82,6 +83,9 @@ class Home extends React.Component {
     artistSelectHandler = (e) => {
         this.setState({artists: e.target.value});
     }
+    movieClickHandler = (movieId) => {
+        ReactDOM.render(<Details movieId={movieId} />, document.getElementById('root'));
+    }
 
     render() {
         const { classes } = this.props;
@@ -103,7 +107,7 @@ class Home extends React.Component {
                     <div>
                         <GridList cellHeight={350} cols={4} className={classes.gridListReleasedMovies}>
                             {moviesData.map(movie => (
-                                <GridListTile key={movie.id} className={classes.releasedMoviesAlign}>
+                                <GridListTile onClick={this.movieClickHandler.bind(this, movie.id)} key={"grid" + movie.id} className={classes.releasedMoviesAlign}>
                                     <img src={movie.poster_url} alt={movie.title} className="movie-poster" />
                                     <GridListTileBar
                                         title={movie.title}
@@ -179,13 +183,12 @@ class Home extends React.Component {
                                         InputLabelProps={{ shrink: true }}
                                     />
                                 </FormControl>
-                                <p>
-                                    <FormControl className={classes.formControl}>
-                                        <Button variant="contained" color="primary">
-                                            APPLY
-                                        </Button>
-                                    </FormControl>
-                                </p>
+                                <br/><br/>
+                                <FormControl className={classes.formControl}>
+                                    <Button variant="contained" color="primary">
+                                        APPLY
+                                    </Button>
+                                </FormControl>
                             </CardContent>
                         </Card>
                     </div>
