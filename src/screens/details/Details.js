@@ -9,6 +9,7 @@ import YouTube from 'react-youtube';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 class Details extends React.Component {
     constructor(props) {
@@ -16,7 +17,34 @@ class Details extends React.Component {
         this.state = {
             movie: moviesData.filter((mov) => {
                 return mov.id === this.props.movieId
-            })[0]
+            })[0],
+            starIcons: [
+                {
+                   id: 1,
+                   stateId: "star1",
+                   color: "black"
+                },
+                {
+                   id: 2,
+                   stateId: "star2",
+                   color: "black"
+                },
+                {
+                   id: 3,
+                   stateId: "star3",
+                   color: "black"
+                },
+                {
+                   id: 4,
+                   stateId: "star4",
+                   color: "black"
+                },
+                {
+                   id: 5,
+                   stateId: "star5",
+                   color: "black"
+                }
+             ]
         }
     }
     
@@ -30,7 +58,19 @@ class Details extends React.Component {
     artistClickHandler = (url) => {
         window.location = url;
     }
-    
+    startClickHandler = (id) => {
+        let starIconList = [];
+        for(let star of this.state.starIcons) {
+            let startNode = star;
+            if(star.id <= id) {
+                startNode.color = "yellow";
+            }else {
+                startNode.color = "black";
+            }
+            starIconList.push(startNode);
+        }
+        this.setState({starIcons: starIconList});
+    }
     render() {
         let { movie } = this.state;
         const opts = {
@@ -93,6 +133,10 @@ class Details extends React.Component {
                         </div>
                     </div>
                     <div className="rightDetails">
+                        <Typography> <span className="bold">Rate this movie: </span></Typography>
+                        {this.state.starIcons.map(star => (
+                            <StarBorderIcon className={star.color} key={"star" + star.id} onClick={this.startClickHandler.bind(this, star.id)} />
+                        ))}
                         <div className="bold marginBottom16 marginTop16">
                             <Typography>
                                 <span className="bold">Artists:</span>
