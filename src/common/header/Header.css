@@ -5,7 +5,7 @@
     margin: 0 auto;
     background: #000000;
     display: flex;
-    justify-content: space-between;
+    justify-content: row;
     align-items: center;
 }
 .header-container > img {
@@ -31,6 +31,27 @@
     height: 35px;
     background: #ff7f7f;
 }
+.login-button {
+    margin-left: 10px;
+    width: auto;
+}
+.bookshow-button {
+    width: auto;
+}
+.width-15-percentage {
+    width: 15%;
+}
+.width-85-percentage {
+    width: 85%;
+}
+.margin-right-10px {
+    margin-right: 10px;
+}
+.flex-align {
+    display: flex;
+    justify-content: flex-end;
+}
+
 @keyframes app-logo-spin {
     from {
         transform: scaleX(-1);

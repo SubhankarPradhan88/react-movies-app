@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
 import './Header.css';
 import logo from '../../assets/logo.svg';
@@ -12,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import BookMyShow from '../../screens/bookshow/BookMyShow';
 
 const customStyles = {
     content: {
@@ -147,16 +149,33 @@ class Header extends React.Component {
                 this.setState({contactNo: e.target.value.trim()});
         }
     }
+    bookshowHandler = () => {
+        ReactDOM.render(<BookMyShow />, document.getElementById('root'));
+    }
 
     render() {
         let {username, password, firstname, lastname, email, registerPassword, contactNo} = this.state;
         return (
             <React.Fragment>
                 <header className="header-container">
-                    <img src={logo} className="app-logo" alt="logo" />
-                    <Button variant="contained" color="default" onClick={this.openModalHandler}>
-                        Login
-                    </Button>
+                    <div className="width-85-percentage">
+                        <img src={logo} className="app-logo" alt="logo" />
+                    </div>
+                    <div className="flex-align width-15-percentage margin-right-10px">
+                        {this.props.showBookShowButton ? 
+                            <div className="bookshow-button">
+                                <Button variant="contained" color="primary" onClick={this.bookshowHandler}>
+                                    BOOK SHOW
+                                </Button>
+                            </div> :
+                            null
+                        }
+                        <div className="login-button">
+                            <Button variant="contained" color="default" onClick={this.openModalHandler}>
+                                Login
+                            </Button>
+                        </div>
+                    </div>
                 </header>
                 <Modal 
                     ariaHideApp={false} 
